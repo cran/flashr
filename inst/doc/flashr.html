@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>flashr</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">flashr</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flashr)</span></code></pre></div>
+<p>Flashcards are a great way to learn information. The repetition of
+exposure to technical terms and their descriptions/definitions helps
+with remembering those relationships (Yüksel et al., 2020)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Hermans (2021)<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> suggests
+using flashcards for learning programming languages, which inspired the
+<code>{flashr}</code> package. The aim of this package is to create a
+simple way to use and generate new decks of flashcards for learning R
+function or anything else you want to learn!</p>
+<div id="usage" class="section level2">
+<h2>Usage</h2>
+<p><code>{flashr}</code> has a number of <a href="https://github.com/JeffreyRStevens/flashr_decks">built-in
+flashcard decks</a> to help you learn R, and especially the <a href="https://www.tidyverse.org/">tidyverse</a>. The workhorse of the
+package is the <a href="https://jeffreyrstevens.github.io/flashr/reference/flashcard.html"><code>flashcard()</code></a>
+function, which uses <a href="https://revealjs.com/">reveal.js</a><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> to
+generate an HTML presentation displaying terms and descriptions. For
+RStudio users, the flashcard presentation will appear in the Viewer
+pane. Outside of RStudio, the function will open the presentation in
+your default browser. In either case, you can advance slides with the
+right arrow key or by clicking the right arrow in the presentation.</p>
+<p>For example, to create a set of flashcards from the built-in
+<code>data_types</code> deck, simply run:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">flashcard</span>(<span class="st">&quot;data_types&quot;</span>)</span></code></pre></div>
+<p>The presentation will start with the title of the deck, then give a
+blank slide, then present the first term, followed by the description,
+and a blank slide. The order of terms/descriptions is randomized when
+the <a href="https://jeffreyrstevens.github.io/flashr/reference/flashcard.html"><code>flashcard()</code></a>
+function is run, so just re-run it to generate a different order.</p>
+<div id="guess-the-term" class="section level3">
+<h3>Guess the term</h3>
+<p>By default, terms are presented before descriptions. So when you see
+a term, you should try to define/describe the term. But it is possible
+to present descriptions first so you can guess the term by including the
+<code>termfirst = FALSE</code> argument.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">flashcard</span>(<span class="st">&quot;data_types&quot;</span>, <span class="at">termsfirst =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div id="including-package-names" class="section level3">
+<h3>Including package names</h3>
+<p>Another feature of <a href="https://jeffreyrstevens.github.io/flashr/reference/flashcard.html"><code>flashcard()</code></a>
+is that it can present the name of the package for each function. Often
+this is useful to distinguish base R function from functions that
+require other packages. By default, presentations include the package
+names. However, you can turn this off with
+<code>package = FALSE</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">flashcard</span>(<span class="st">&quot;data_types&quot;</span>, <span class="at">package =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div id="themes" class="section level3">
+<h3>Themes</h3>
+<p>Because <code>{flashr}</code> uses reveal.js to create the
+presentations, it can use the available <a href="https://revealjs.com/themes/">reveal.js themes</a>. By default, <a href="https://jeffreyrstevens.github.io/flashr/reference/flashcard.html"><code>flashcard()</code></a>
+uses the <code>moon</code> theme, but if that doesn’t suit you, you can
+change the theme by setting the <code>theme</code> argument. At the
+moment, available themes are <code>black</code>, <code>white</code>,
+<code>league</code>, <code>beige</code>, <code>sky</code>,
+<code>night</code>, <code>serif</code>, <code>simple</code>,
+<code>solarized</code>, <code>blood</code>, and <code>moon</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">flashcard</span>(<span class="st">&quot;data_types&quot;</span>, <span class="at">theme =</span> <span class="st">&quot;sky&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="available-decks" class="section level2">
+<h2>Available decks</h2>
+<p>Currently, <code>{flashr}</code> includes a few example decks
+(<code>data_types</code>, <code>vectors</code>) and decks of functions
+and arguments derived from <a href="https://r4ds.had.co.nz/">R for Data
+Science (first edition)</a>. These decks are housed at the <a href="https://github.com/JeffreyRStevens/flashr_decks">flashr_decks
+GitHub repo</a>, and more are on the way.</p>
+<p>To see what decks are available, use <a href="https://jeffreyrstevens.github.io/flashr/reference/list_decks.html"><code>list_decks()</code></a>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list_decks</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Available flashcard decks</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. Data types (data_types)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. Operators (operators)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3. PsyTeachR ADS Ch. 1 (psyteachr_ads1)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4. PsyTeachR ADS Ch. 2 (psyteachr_ads2)</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5. PsyTeachR ADS Ch. 3 (psyteachr_ads3)</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6. PsyTeachR ADS Ch. 4 (psyteachr_ads4)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7. PsyTeachR ADS Ch. 5 (psyteachr_ads5)</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8. PsyTeachR ADS Ch. 7 (psyteachr_ads7)</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9. PsyTeachR ADS Ch. 8 (psyteachr_ads8)</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10. PsyTeachR ADS Ch. 9 (psyteachr_ads9)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11. PsyTeachR DSRR Ch. 1 (psyteachr_dsrr1)</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12. PsyTeachR DSRR Ch. 2 (psyteachr_dsrr2)</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13. PsyTeachR DSRR Ch. 3 (psyteachr_dsrr3)</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14. PsyTeachR DSRR Ch. 4 (psyteachr_dsrr4)</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15. PsyTeachR DSRR Ch. 5 (psyteachr_dsrr5)</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16. PsyTeachR DSRR Ch. 6 (psyteachr_dsrr6)</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17. PsyTeachR DSRR Ch. 7 (psyteachr_dsrr7)</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18. PsyTeachR DSRR Ch. 8 (psyteachr_dsrr8)</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19. PsyTeachR DSRR Ch. 9 (psyteachr_dsrr9)</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20. PsyTeachR DSRR Ch. 10 (psyteachr_dsrr10)</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21. PsyTeachR QFA Ch. 1 (psyteachr_qfa1)</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22. PsyTeachR QFA Ch. 2 (psyteachr_qfa2)</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23. PsyTeachR QFA Ch. 3 (psyteachr_qfa3)</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24. PsyTeachR QFA Ch. 4 (psyteachr_qfa4)</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25. PsyTeachR QFA Ch. 5 (psyteachr_qfa5)</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26. PsyTeachR QFA Ch. 6 (psyteachr_qfa6)</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27. PsyTeachR QFA Ch. 7 (psyteachr_qfa7)</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28. PsyTeachR QFA Ch. 8 (psyteachr_qfa8)</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29. PsyTeachR QFA Ch. 9 (psyteachr_qfa9)</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30. PsyTeachR QFA Ch. 10 (psyteachr_qfa10)</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31. PsyTeachR QFA Ch. 11 (psyteachr_qfa11)</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32. R4DS Ch. 1 (r4ds1)</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33. R4DS Ch. 3 (r4ds3)</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34. R4DS Ch. 5 (r4ds5)</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35. R4DS Ch. 7 (r4ds7)</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36. R4DS Ch. 8 (r4ds8)</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 37. R4DS Ch. 10 (r4ds10)</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38. R4DS Ch. 11 (r4ds11)</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39. R4DS Ch. 12 (r4ds12)</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40. R4DS Ch. 13 (r4ds13)</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41. R4DS Ch. 14 (r4ds14)</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42. R4DS Ch. 15 (r4ds15)</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43. R4DS Ch. 16 (r4ds16)</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44. R4DS Ch. 18 (r4ds18)</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 45. R4DS Ch. 19 (r4ds19)</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 46. R4DS Ch. 20 (r4ds20)</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 47. R4DS Ch. 21 (r4ds21)</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 48. R4DS Ch. 23 (r4ds23)</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 49. R4DS Ch. 25 (r4ds25)</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50. R4DS Ch. 27 (r4ds27)</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 51. R4DS Ch. 28 (r4ds28)</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 52. R4DS Ch. 29 (r4ds29)</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 53. R4DS Ch. 30 (r4ds30)</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 54. Vectors (vectors)</span></span></code></pre></div>
+<p>Note that the list of decks includes the deck names in parenthesis
+next to the descriptions. For instance, for <em>R4DS Chapter 3</em>, the
+name is <code>r4ds3</code>.</p>
+<p>This function includes pattern matching. So if you want to narrow you
+list down, add a search string.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list_decks</span>(<span class="at">pattern =</span> <span class="st">&quot;r4ds&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Available flashcard decks</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. R4DS Ch. 1 (r4ds1)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. R4DS Ch. 3 (r4ds3)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3. R4DS Ch. 5 (r4ds5)</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4. R4DS Ch. 7 (r4ds7)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5. R4DS Ch. 8 (r4ds8)</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6. R4DS Ch. 10 (r4ds10)</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7. R4DS Ch. 11 (r4ds11)</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8. R4DS Ch. 12 (r4ds12)</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9. R4DS Ch. 13 (r4ds13)</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10. R4DS Ch. 14 (r4ds14)</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11. R4DS Ch. 15 (r4ds15)</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12. R4DS Ch. 16 (r4ds16)</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13. R4DS Ch. 18 (r4ds18)</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14. R4DS Ch. 19 (r4ds19)</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15. R4DS Ch. 20 (r4ds20)</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16. R4DS Ch. 21 (r4ds21)</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17. R4DS Ch. 23 (r4ds23)</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18. R4DS Ch. 25 (r4ds25)</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19. R4DS Ch. 27 (r4ds27)</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20. R4DS Ch. 28 (r4ds28)</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21. R4DS Ch. 29 (r4ds29)</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22. R4DS Ch. 30 (r4ds30)</span></span></code></pre></div>
+<p>If you want to list the decks and then choose one, use <a href="https://jeffreyrstevens.github.io/flashr/reference/choose_deck.html"><code>choose_deck()</code></a>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choose_deck</span>(<span class="st">&quot;r4ds&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt; Available flashcard decks
+#&gt; 1. R4DS Ch. 1 (r4ds1)
+#&gt; 2. R4DS Ch. 3 (r4ds3)
+#&gt; 3. R4DS Ch. 5 (r4ds5)
+#&gt; 4. R4DS Ch. 7 (r4ds7)
+#&gt; 5. R4DS Ch. 8 (r4ds8)
+#&gt; 6. R4DS Ch. 10 (r4ds10)
+#&gt; 7. R4DS Ch. 11 (r4ds11)
+#&gt; 8. R4DS Ch. 12 (r4ds12)
+#&gt; 9. R4DS Ch. 13 (r4ds13)
+#&gt; 10. R4DS Ch. 14 (r4ds14)
+#&gt; 11. R4DS Ch. 15 (r4ds15)
+#&gt; 12. R4DS Ch. 16 (r4ds16)
+#&gt; 13. R4DS Ch. 18 (r4ds18)
+#&gt; 14. R4DS Ch. 19 (r4ds19)
+#&gt; 15. R4DS Ch. 20 (r4ds20)
+#&gt; 16. R4DS Ch. 21 (r4ds21)
+#&gt; 17. R4DS Ch. 23 (r4ds23)
+#&gt; 18. R4DS Ch. 25 (r4ds25)
+#&gt; 19. R4DS Ch. 27 (r4ds27)
+#&gt; 20. R4DS Ch. 28 (r4ds28)
+#&gt; 21. R4DS Ch. 29 (r4ds29)
+#&gt; 22. R4DS Ch. 30 (r4ds30)
+#&gt; Please enter the number for a deck or 0 to exit:</code></pre>
+<p>Or, if you already know the deck number that you want, you can
+include it in the <code>choice</code> argument.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choose_deck</span>(<span class="st">&quot;r4ds&quot;</span>, <span class="at">choice =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p>Of course, a faster way to do this is to enter the deck name directly
+into <a href="https://jeffreyrstevens.github.io/flashr/reference/flashcard.html"><code>flashcard()</code></a>.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">flashcard</span>(<span class="st">&quot;r4ds3&quot;</span>)</span></code></pre></div>
+<p>You can also view <a href="https://jeffreyrstevens.github.io/flashr_decks/decks.html">examples
+of all of the decks in HTML</a>.</p>
+</div>
+<div id="creating-your-own-decks" class="section level2">
+<h2>Creating your own decks</h2>
+<p>In addition to built-in decks, you can create your own decks by
+either making a CSV file with the terms and descriptions or passing a
+vector of functions from the <a href="https://jeffreyrstevens.github.io/flashr_decks/functions.html">flashr_decks
+list of functions</a>.</p>
+<div id="csv-file" class="section level3">
+<h3>CSV file</h3>
+<p>Simply create a CSV file that includes a column labeled
+<code>term</code> and a column labeled <code>description</code>. You can
+also include a <code>package</code> column listing package names and a
+<code>title</code> column to give your presentation a title, but these
+are optional arguments<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. Here is an example of a CSV file with all
+of the columns.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>my_deck <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;../inst/extdata/operators.csv&quot;</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(my_deck)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="left">description</th>
+<th align="left">package</th>
+<th align="left">title</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">=</td>
+<td align="left">assignment operator</td>
+<td align="left">base</td>
+<td align="left">Operators</td>
+</tr>
+<tr class="even">
+<td align="left">&lt;-</td>
+<td align="left">assignment operator</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">|&gt;</td>
+<td align="left">pipe operator (base R)</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">+</td>
+<td align="left">addition</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">-</td>
+<td align="left">subtraction</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">*</td>
+<td align="left">multiplication</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">/</td>
+<td align="left">division</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">%%</td>
+<td align="left">modulo or remainder</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">%/%</td>
+<td align="left">integer division or quotient</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">^</td>
+<td align="left">exponent</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">&gt;</td>
+<td align="left">greater than</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">&lt;</td>
+<td align="left">less than</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">&lt;=</td>
+<td align="left">greater than or equal to</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">&gt;=</td>
+<td align="left">less than or equal to</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">==</td>
+<td align="left">equal to</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">!=</td>
+<td align="left">not equal to</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">&amp;</td>
+<td align="left">logical AND</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">|</td>
+<td align="left">logical OR</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">!</td>
+<td align="left">logical NOT</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">:</td>
+<td align="left">sequence of integers</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">%in%</td>
+<td align="left">identify if element is in vector</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">%*%</td>
+<td align="left">multiply matrix with its transpose</td>
+<td align="left">base</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>You can, of course, store those decks on your local computer to use
+them. But if your decks may be useful for other people (for example,
+based on books or publicly available resources), consider submitting
+them to the <a href="https://github.com/JeffreyRStevens/flashr_decks/">flashr_decks
+repo</a>.</p>
+<p>Alternatively, you can create your own repo of decks and specify with
+the <code>repo</code> argument. Just make sure that your CSV files are
+saved in a <code>decks/</code> folder in your repo’s root directory.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list_decks</span>(<span class="at">repo =</span> <span class="st">&quot;JeffreyRStevens/flashr_decks&quot;</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Available flashcard decks</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. Data types (data_types)</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. Operators (operators)</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3. PsyTeachR ADS Ch. 1 (psyteachr_ads1)</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4. PsyTeachR ADS Ch. 2 (psyteachr_ads2)</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5. PsyTeachR ADS Ch. 3 (psyteachr_ads3)</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6. PsyTeachR ADS Ch. 4 (psyteachr_ads4)</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7. PsyTeachR ADS Ch. 5 (psyteachr_ads5)</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8. PsyTeachR ADS Ch. 7 (psyteachr_ads7)</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9. PsyTeachR ADS Ch. 8 (psyteachr_ads8)</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10. PsyTeachR ADS Ch. 9 (psyteachr_ads9)</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11. PsyTeachR DSRR Ch. 1 (psyteachr_dsrr1)</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12. PsyTeachR DSRR Ch. 2 (psyteachr_dsrr2)</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13. PsyTeachR DSRR Ch. 3 (psyteachr_dsrr3)</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14. PsyTeachR DSRR Ch. 4 (psyteachr_dsrr4)</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15. PsyTeachR DSRR Ch. 5 (psyteachr_dsrr5)</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16. PsyTeachR DSRR Ch. 6 (psyteachr_dsrr6)</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17. PsyTeachR DSRR Ch. 7 (psyteachr_dsrr7)</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18. PsyTeachR DSRR Ch. 8 (psyteachr_dsrr8)</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19. PsyTeachR DSRR Ch. 9 (psyteachr_dsrr9)</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20. PsyTeachR DSRR Ch. 10 (psyteachr_dsrr10)</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21. PsyTeachR QFA Ch. 1 (psyteachr_qfa1)</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22. PsyTeachR QFA Ch. 2 (psyteachr_qfa2)</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23. PsyTeachR QFA Ch. 3 (psyteachr_qfa3)</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24. PsyTeachR QFA Ch. 4 (psyteachr_qfa4)</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25. PsyTeachR QFA Ch. 5 (psyteachr_qfa5)</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26. PsyTeachR QFA Ch. 6 (psyteachr_qfa6)</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27. PsyTeachR QFA Ch. 7 (psyteachr_qfa7)</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28. PsyTeachR QFA Ch. 8 (psyteachr_qfa8)</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29. PsyTeachR QFA Ch. 9 (psyteachr_qfa9)</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30. PsyTeachR QFA Ch. 10 (psyteachr_qfa10)</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31. PsyTeachR QFA Ch. 11 (psyteachr_qfa11)</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32. R4DS Ch. 1 (r4ds1)</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33. R4DS Ch. 3 (r4ds3)</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34. R4DS Ch. 5 (r4ds5)</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35. R4DS Ch. 7 (r4ds7)</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36. R4DS Ch. 8 (r4ds8)</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 37. R4DS Ch. 10 (r4ds10)</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38. R4DS Ch. 11 (r4ds11)</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39. R4DS Ch. 12 (r4ds12)</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40. R4DS Ch. 13 (r4ds13)</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41. R4DS Ch. 14 (r4ds14)</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42. R4DS Ch. 15 (r4ds15)</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43. R4DS Ch. 16 (r4ds16)</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44. R4DS Ch. 18 (r4ds18)</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 45. R4DS Ch. 19 (r4ds19)</span></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 46. R4DS Ch. 20 (r4ds20)</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 47. R4DS Ch. 21 (r4ds21)</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 48. R4DS Ch. 23 (r4ds23)</span></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 49. R4DS Ch. 25 (r4ds25)</span></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50. R4DS Ch. 27 (r4ds27)</span></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 51. R4DS Ch. 28 (r4ds28)</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 52. R4DS Ch. 29 (r4ds29)</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 53. R4DS Ch. 30 (r4ds30)</span></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 54. Vectors (vectors)</span></span></code></pre></div>
+</div>
+<div id="drawing-from-list-of-functions" class="section level3">
+<h3>Drawing from list of functions</h3>
+<p>We’ve collected all of the functions in the currently available decks
+in a <a href="https://jeffreyrstevens.github.io/flashr_decks/functions.html">table
+at the flashr_decks repo</a>. The <a href="https://jeffreyrstevens.github.io/flashr/reference/create_deck.html"><code>create_deck()</code></a>
+function takes a vector that you create of functions from the <a href="https://jeffreyrstevens.github.io/flashr_decks/functions.html">function
+list</a>. Make sure to include the <code>()</code> at the end of the
+function name (except for operators)! And don’t forget to include a
+title.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>my_functions <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;%&gt;%&quot;</span>, <span class="st">&quot;ggplot()&quot;</span>, <span class="st">&quot;aes()&quot;</span>, <span class="st">&quot;geom_point()&quot;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">create_deck</span>(my_functions,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;ggplot basics&quot;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>All of the arguments from <a href="https://jeffreyrstevens.github.io/flashr/reference/flashcard.html"><code>flashcard()</code></a>
+apply to <a href="https://jeffreyrstevens.github.io/flashr/reference/create_deck.html"><code>create_deck()</code></a>,
+so you can customize the theme, fonts, etc. and save the output
+locally.</p>
+</div>
+<div id="expanding-your-flashcards" class="section level3">
+<h3>Expanding your flashcards</h3>
+<p>These flashcards were designed to learn programming
+functions/arguments and their definitions. But <code>{flashr}</code> can
+be use for any pairing of terms and descriptions, computing-based or
+otherwise. So feel free to make flashcard decks of whatever you want to
+learn: words from a language that you are learning, terms you’re
+studying for classes, whatever you need!</p>
+</div>
+</div>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>Yüksel, H. G., Mercanoğlu, H. G., &amp; Yılmaz, M. B.
+(2020). Digital flashcards vs. Wordlists for learning technical
+vocabulary. Computer Assisted Language Learning, 0(0), 1–17. <a href="https://doi.org/10.1080/09588221.2020.1854312" class="uri">https://doi.org/10.1080/09588221.2020.1854312</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Hermans, F. (2021). The Programmer’s Brain. Manning. <a href="https://www.manning.com/books/the-programmers-brain">https://www.manning.com/books/the-programmers-brain</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Via the <a href="https://github.com/rstudio/revealjs">revealjs</a> R package.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Note <code>title</code> is required when submitting to
+<a href="https://github.com/JeffreyRStevens/flashr_decks">flashr_decks</a><a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
