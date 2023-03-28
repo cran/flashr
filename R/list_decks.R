@@ -1,4 +1,3 @@
-
 #' List available available flashcard decks
 #'
 #' @description This function searches for flashcard decks stored in GitHub
@@ -29,7 +28,7 @@
 #'
 #' @family functions for finding decks
 #'
-#' @examples
+#' @examplesIf interactive()
 #' # View all available decks
 #' list_decks()
 #'
@@ -116,7 +115,7 @@ list_decks <- function(pattern = NULL,
 #'
 #' @family functions for finding decks
 #'
-#' @examples
+#' @examplesIf interactive()
 #' \dontrun{
 #' # Choose from all available decks in default repository
 #' choose_deck()

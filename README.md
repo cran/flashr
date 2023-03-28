@@ -1,12 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# flashr
+# flashr <a href="https://jeffreyrstevens.github.io/flashr/"><img src="man/figures/logo.png" align="right" width="100" class="logo"/></a>
 
 <!-- badges: start -->
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/flashr)](https://cran.r-project.org/package=flashr)
+[![Total
+Downloads](https://cranlogs.r-pkg.org/badges/grand-total/flashr)](https://CRAN.R-project.org/package=flashr)
+
 [![R-CMD-check](https://github.com/JeffreyRStevens/flashr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JeffreyRStevens/flashr/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/JeffreyRStevens/flashr/branch/main/graph/badge.svg?token=XGH2OV874R)](https://app.codecov.io/gh/JeffreyRStevens/flashr)
 <!-- badges: end -->
@@ -31,11 +35,18 @@ can be used to build decks for anything—not just computer syntax!
 
 ## Installation
 
+You can install the stable released version of flashr from
+[CRAN](https://cran.r-project.org/package=flashr) with:
+
+``` r
+install.packages("flashr")
+```
+
 You can install the development version of flashr like so:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("JeffreyRStevens/flashr")
+# install.packages("remotes")
+remotes::install_github("JeffreyRStevens/flashr")
 ```
 
 ## Example
@@ -91,7 +102,7 @@ To cite flashr, use:
 
 > Stevens, Jeffrey R. (2022). flashr: Creates flashcards of terms and
 > definitions. (version 0.1.0)
-> <https://github.com/JeffreyRStevens/flashr>
+> <https://cran.r-project.org/package=flashr>
 
 ## Contributing to this package
 

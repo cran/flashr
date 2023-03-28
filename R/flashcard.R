@@ -32,7 +32,7 @@
 #'
 #' @family functions for creating decks
 #'
-#' @examples
+#' @examplesIf interactive()
 #' \donttest{
 #' # Display terms then descriptions
 #' flashcard("data_types")
@@ -57,7 +57,6 @@ flashcard <- function(x,
 
   # Assign deck title and deckname
   title <- attr(deck, "title")
-  deckname <- attr(deck, "deckname")
   package <- attr(deck, "package")
 
   build_deck(deck,
@@ -109,7 +108,7 @@ flashcard <- function(x,
 #'
 #' @family functions for creating decks
 #'
-#' @examples
+#' @examplesIf interactive()
 #' \donttest{
 #' # Display terms then descriptions
 #' my_functions <- c("as_tibble()", "bind_rows()", "c()")
