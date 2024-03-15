@@ -1,7 +1,7 @@
 Type: Package
 Package: flashr
 Title: Create Flashcards of Terms and Definitions
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: 
     person("Jeffrey R.", "Stevens", , "jeffrey.r.stevens@protonmail.com", 
     role = c("aut", "cre", "cph"),
@@ -23,10 +23,10 @@ VignetteBuilder: knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 NeedsCompilation: no
-Packaged: 2023-03-27 23:41:18 UTC; jstevens
+Packaged: 2024-03-15 19:27:04 UTC; jstevens
 Author: Jeffrey R. Stevens [aut, cre, cph]
     (<https://orcid.org/0000-0003-2375-1360>)
 Repository: CRAN
-Date/Publication: 2023-03-28 07:00:09 UTC
+Date/Publication: 2024-03-15 19:40:02 UTC
