@@ -53,7 +53,7 @@ flashcard <- function(x,
                       linkcolor = NULL,
                       use_browser = FALSE) {
   # Validate deck
-  deck <- validate_deck(x, package = package)
+  deck <- validate_deck(x, pkg = package)
 
   # Assign deck title and deckname
   title <- attr(deck, "title")
@@ -145,7 +145,7 @@ create_deck <- function(x,
   )
 }
 
-validate_deck <- function(x, package = package) {
+validate_deck <- function(x, pkg = package) {
   # Convert all deck objects to strings
   valid_decks <- list_decks(quiet = TRUE)
   if (is.character(x)) {
@@ -154,41 +154,66 @@ validate_deck <- function(x, package = package) {
     input <- deparse(substitute(x))
   }
 
-  # Validate input
-  if (length(input) > 1) {
-    cli::cli_abort("Input is a vector rather than available deck or CSV file.")
-  }
+  if (length(x) == 1) {
+    if (grepl(".csv", input)) { # if input is CSV file
+      # Get deck and deckname
+      deck <- utils::read.csv(input)
+      deckname <- gsub(".csv", "", basename(x))
 
-  if (grepl(".csv", input)) { # if input is CSV file
-    # Get deck and deckname
-    deck <- utils::read.csv(input)
-    deckname <- gsub(".csv", "", basename(x))
-
-    # Get title from file or use file name
-    if ("title" %in% names(deck)) {
+      # Get title from file or use file name
+      if ("title" %in% names(deck)) {
+        title <- deck$title[1]
+      } else {
+        title <- deckname
+        cli::cli_alert_info(
+          "No {.field title} column, so using filename for title."
+        )
+      }
+    } else if (input %in% valid_decks$decklabels) { # if input is in valid decks
+      # Get deck and deckname
+      deck <- utils::read.csv(paste0("https://raw.githubusercontent.com/JeffreyRStevens/flashr_decks/main/decks/", input, ".csv"),
+        na.strings = ""
+      )
+      deckname <- input
       title <- deck$title[1]
-    } else {
-      title <- deckname
-      cli::cli_alert_info(
-        "No {.field title} column, so using filename for title."
+    } else { # if input is not CSV or valid deck
+      cli::cli_abort(
+        "This deck is not recognized as a available deck or a valid data frame or CSV file."
       )
     }
-  } else if (input %in% valid_decks$decklabels) { # if input is in valid decks
-    # Get deck and deckname
-    deck <- utils::read.csv(paste0("https://raw.githubusercontent.com/JeffreyRStevens/flashr_decks/main/decks/", input, ".csv"),
-      na.strings = ""
-    )
-    deckname <- input
-    title <- deck$title[1]
+  } else if (inherits(x, "data.frame")) { # if input is a data frame
+    deck <- x
+    deckname <- deparse(substitute(x))
+    if (!"term" %in% names(deck)) {
+      cli::cli_abort(
+        "This data frame does not have term column."
+      )
+    } else if (!"description" %in% names(deck)) {
+      cli::cli_abort(
+        "This data frame does not have description column."
+      )
+    } else {
+      if ("title" %in% names(deck)) {
+        title <- deck$title[1]
+      } else {
+        title <- deckname
+        cli::cli_alert_info(
+          "No title column, so using {deckname} for title."
+        )
+      }
+    }
   } else { # if input is not CSV or valid deck
     cli::cli_abort(
-      "This deck is not recognized as a available deck or a valid CSV file."
+      "This deck is not recognized as a available deck or a valid data frame or CSV file."
     )
   }
-
   # Check if package column is present if package = TRUE
-  if (package && !"package" %in% names(deck)) {
+  if (pkg && !"package" %in% names(deck)) {
     cli::cli_alert_info("This deck does not include a {.field package} column. Setting {.code package = FALSE}.")
+    package <- FALSE
+  } else if (pkg) {
+    package <- TRUE
+  } else {
     package <- FALSE
   }
 

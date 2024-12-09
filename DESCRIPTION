@@ -1,7 +1,7 @@
 Type: Package
 Package: flashr
 Title: Create Flashcards of Terms and Definitions
-Version: 0.1.2
+Version: 0.2.0
 Authors@R: 
     person("Jeffrey R.", "Stevens", , "jeffrey.r.stevens@protonmail.com", 
     role = c("aut", "cre", "cph"),
@@ -17,16 +17,17 @@ URL: https://github.com/JeffreyRStevens/flashr,
         https://jeffreyrstevens.github.io/flashr/
 BugReports: https://github.com/JeffreyRStevens/flashr/issues
 Depends: R (>= 2.10)
-Imports: cli, curl, gh, httr, memoise, revealjs, rmarkdown, testthat
-Suggests: covr, knitr, withr
+Imports: cli, curl, gh, httr, memoise, revealjs, rmarkdown, testthat,
+        utils
+Suggests: covr, knitr, litedown, withr
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 NeedsCompilation: no
-Packaged: 2024-03-15 19:27:04 UTC; jstevens
+Packaged: 2024-12-09 00:00:35 UTC; jstevens
 Author: Jeffrey R. Stevens [aut, cre, cph]
     (<https://orcid.org/0000-0003-2375-1360>)
 Repository: CRAN
-Date/Publication: 2024-03-15 19:40:02 UTC
+Date/Publication: 2024-12-09 00:10:02 UTC

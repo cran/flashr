@@ -5,12 +5,14 @@
 
 <!-- badges: start -->
 
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/flashr)](https://cran.r-project.org/package=flashr)
 [![Total
 Downloads](https://cranlogs.r-pkg.org/badges/grand-total/flashr)](https://CRAN.R-project.org/package=flashr)
-
 [![R-CMD-check](https://github.com/JeffreyRStevens/flashr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JeffreyRStevens/flashr/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/JeffreyRStevens/flashr/branch/main/graph/badge.svg?token=XGH2OV874R)](https://app.codecov.io/gh/JeffreyRStevens/flashr)
 <!-- badges: end -->
@@ -65,7 +67,10 @@ If you would like to present descriptions before terms:
 flashcard("data_types", termsfirst = FALSE)
 ```
 
-![](man/figures/flashr.gif)
+<img src="man/figures/flashr.gif" alt="GIF of RStudio IDE console showing
+the loading of flashr \[library(flashr)\] and the creation of a data
+types deck with flashcard('data_types'). The deck opens in the viewer
+where terms and descriptions are clicked through.">
 
 ## Building decks
 
@@ -76,6 +81,7 @@ want to specify the title of the deck.
 
 ``` r
 my_deck <- read.csv("inst/extdata/operators.csv")
+
 head(my_deck)
 #>   term            description package     title
 #> 1    =    assignment operator    base Operators
@@ -101,7 +107,7 @@ for more details on creating your own flashcard deck.
 To cite flashr, use:
 
 > Stevens, Jeffrey R. (2024). flashr: Creates flashcards of terms and
-> definitions. (version 0.1.2)
+> definitions. (version 0.2.0)
 > <https://cran.r-project.org/package=flashr>
 
 ## Contributing to this package
