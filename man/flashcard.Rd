@@ -10,10 +10,12 @@ flashcard(
   package = TRUE,
   theme = "moon",
   file = NULL,
+  random = TRUE,
   fontsize = "default",
   fontcolor = NULL,
   linkcolor = NULL,
-  use_browser = FALSE
+  use_browser = FALSE,
+  omit_na = TRUE
 )
 }
 \arguments{
@@ -30,6 +32,9 @@ descriptions first (FALSE)}
 \item{file}{Path and file name used to save flashcard deck locally (must
 save as HTML)}
 
+\item{random}{Logical indicating whether to randomize order of terms (TRUE)
+or use order from data frame}
+
 \item{fontsize}{Base font size for presentation. Acceptable values include
 "default" (500\%), "large" (700\%), and "small" (300\%). Custom values can be
 set as percentages (e.g., "250\%").}
@@ -42,6 +47,10 @@ color name, or hex code.}
 
 \item{use_browser}{Logical indicating whether to show the presentation in the
 RStudio viewer when available (FALSE) or the system's default browser (TRUE)}
+
+\item{omit_na}{Logical indicating whether to omit terms that have no
+descriptions from the deck (default is TRUE, which omits terms with no
+descriptions)}
 }
 \value{
 An HTML file of terms and descriptions rendered in the RStudio viewer or
@@ -53,6 +62,12 @@ ordered pairs of terms and descriptions from built-in flashcard decks.
 The function outputs reveal.js presentation as an HTML file.
 If running in RStudio, the flashcards are output to the viewer.
 Otherwise, they are output to a web browser.
+}
+\note{
+This function \strong{requires internet connectivity} to use existing decks.
+An internet connection is not required if you supply a CSV file. However,
+without an internect connection, themes other than \emph{black}, \emph{white}, and
+\emph{serif}, may not render properly, as they require access to Google Fonts.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

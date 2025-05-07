@@ -1,3 +1,10 @@
+# flashr 0.3.0
+
+* Allow for not randomizing slide order by setting `random = FALSE` (#25)
+* Allow for building decks from CSV files without internet connection (#26)
+* Properly display LaTeX code in terms (#27)
+* Remove pipe from code
+
 # flashr 0.2.0
 
 * Create `extract_code()`, `extract_functions()`, and `build_functions_df()` functions to extract R functions from R Markdown and Quarto documents and build data frames for flashcard decks.

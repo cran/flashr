@@ -15,6 +15,8 @@
 #' @param theme Name of reveal.js theme to use for flashcards
 #' @param file Path and file name used to save flashcard deck locally (must
 #' save as HTML)
+#' @param random Logical indicating whether to randomize order of terms (TRUE)
+#' or use order from data frame
 #' @param fontsize Base font size for presentation. Acceptable values include
 #' "default" (500%), "large" (700%), and "small" (300%). Custom values can be
 #' set as percentages (e.g., "250%").
@@ -24,11 +26,20 @@
 #' color name, or hex code.
 #' @param use_browser Logical indicating whether to show the presentation in the
 #' RStudio viewer when available (FALSE) or the system's default browser (TRUE)
+#' @param omit_na Logical indicating whether to omit terms that have no
+#' descriptions from the deck (default is TRUE, which omits terms with no
+#' descriptions)
 #'
 #' @return
 #' An HTML file of terms and descriptions rendered in the RStudio viewer or
 #' web browser.
+#'
 #' @export
+#'
+#' @note This function **requires internet connectivity** to use existing decks.
+#' An internet connection is not required if you supply a CSV file. However,
+#' without an internect connection, themes other than _black_, _white_, and
+#'  _serif_, may not render properly, as they require access to Google Fonts.
 #'
 #' @family functions for creating decks
 #'
@@ -48,12 +59,18 @@ flashcard <- function(x,
                       package = TRUE,
                       theme = "moon",
                       file = NULL,
+                      random = TRUE,
                       fontsize = "default",
                       fontcolor = NULL,
                       linkcolor = NULL,
-                      use_browser = FALSE) {
+                      use_browser = FALSE,
+                      omit_na = TRUE) {
+  # Check arguments
+  check_logical("package", package)
+  check_logical("omit_na", omit_na)
+
   # Validate deck
-  deck <- validate_deck(x, pkg = package)
+  deck <- validate_deck(x, pkg = package, omit_na = omit_na)
 
   # Assign deck title and deckname
   title <- attr(deck, "title")
@@ -65,6 +82,7 @@ flashcard <- function(x,
     package = package,
     theme = theme,
     file = file,
+    random = random,
     fontsize = fontsize,
     fontcolor = fontcolor,
     linkcolor = linkcolor,
@@ -91,6 +109,8 @@ flashcard <- function(x,
 #' @param theme Name of reveal.js theme to use for flashcards
 #' @param file Path and file name used to save flashcard deck locally (must
 #' save as HTML)
+#' @param random Logical indicating whether to randomize order of terms (TRUE)
+#' or use order from data frame
 #' @param fontsize Base font size for presentation. Acceptable values include
 #' "default" (500%), "large" (700%), and "small" (300%). Custom values can be
 #' set as percentages (e.g., "250%").
@@ -104,6 +124,7 @@ flashcard <- function(x,
 #' @return
 #' An HTML file of terms and descriptions rendered in the RStudio viewer or
 #' web browser.
+#'
 #' @export
 #'
 #' @family functions for creating decks
@@ -126,10 +147,12 @@ create_deck <- function(x,
                         package = TRUE,
                         theme = "moon",
                         file = NULL,
+                        random = TRUE,
                         fontsize = "default",
                         fontcolor = NULL,
                         linkcolor = NULL,
                         use_browser = FALSE) {
+  # Assign deck title and deckname
   deck <- select_terms(x)
 
   build_deck(deck,
@@ -138,6 +161,7 @@ create_deck <- function(x,
     package = package,
     theme = theme,
     file = file,
+    random = random,
     fontsize = fontsize,
     fontcolor = fontcolor,
     linkcolor = linkcolor,
@@ -145,9 +169,15 @@ create_deck <- function(x,
   )
 }
 
-validate_deck <- function(x, pkg = package) {
+validate_deck <- function(x,
+                          pkg = package,
+                          omit_na = omit_na) {
   # Convert all deck objects to strings
-  valid_decks <- list_decks(quiet = TRUE)
+  if (length(x) == 1) {
+    if (!grepl(".csv", x, ignore.case = TRUE)) {
+      valid_decks <- list_decks(quiet = TRUE)
+    }
+  }
   if (is.character(x)) {
     input <- x
   } else {
@@ -217,6 +247,12 @@ validate_deck <- function(x, pkg = package) {
     package <- FALSE
   }
 
+  # Remove missing descriptions
+  if (omit_na) {
+    deck <- deck[!is.na(deck$description), ]
+    deck <- deck[deck$description != "NA", ]
+  }
+
   # Assign title and deckname and invisbily return output
   attr(deck, "title") <- title
   attr(deck, "deckname") <- deckname
@@ -230,19 +266,38 @@ build_deck <- function(deck,
                        package = package,
                        theme = theme,
                        file = file,
+                       random = random,
                        fontsize = fontsize,
                        fontcolor = fontcolor,
                        linkcolor = linkcolor,
                        use_browser = use_browser) {
+  # Check arguments
+  check_character("title", title, nullok = TRUE)
+  check_logical("termsfirst", termsfirst)
+  check_character("theme", theme, c(
+    "default", "black", "white", "league", "beige",
+    "night", "serif", "simple", "solarized",
+    "moon", "sky", "blood"
+  ))
+  check_character("file", file, nullok = TRUE)
+  check_logical("random", random)
+  check_character("fontsize", fontsize)
+  check_character("fontcolor", fontcolor, nullok = TRUE)
+  check_character("linkcolor", linkcolor, nullok = TRUE)
+  check_logical("use_browser", use_browser)
+
   # Shuffle order of items
-  items <- deck[sample(nrow(deck)), ]
+  if (random) {
+    items <- deck[sample(nrow(deck)), ]
+  } else {
+    items <- deck
+  }
 
   # Create title and deckname
   if (is.null(title)) {
     title <- "Custom deck"
   }
-  deckname <- gsub(" ", "_", title) |>
-    tolower()
+  deckname <- tolower(gsub(" ", "_", title))
 
   # Determine fontsize
   if (!grepl("%", fontsize)) {
@@ -307,11 +362,14 @@ build_deck <- function(deck,
   }
   text <- c(text, font_style, link_style, "</style>")
 
-
   # Create slides for each item
   for (i in seq_len(nrow(items))) {
     # Create slide components
-    term <- paste0("`", items$term[i], "`")
+    if (grepl("\\$(.*?)\\$", items$term[i])) {
+      term <- items$term[i]
+    } else {
+      term <- paste0("`", items$term[i], "`")
+    }
     # Add URL if included in deck
     if ("url" %in% names(deck)) {
       if (!is.na(items$url[i])) {
@@ -375,7 +433,9 @@ build_deck <- function(deck,
 }
 
 select_terms <- function(x) {
-  all_functions <- utils::read.csv("https://raw.githubusercontent.com/JeffreyRStevens/flashr_decks/main/data/functions.csv")
+  functions_csv <- "https://raw.githubusercontent.com/JeffreyRStevens/flashr_decks/refs/heads/main/data/functions.csv"
+  fail_gracefully(functions_csv)
+  all_functions <- utils::read.csv(functions_csv)
   functions <- all_functions$term
   operators <- subset(all_functions, !grepl("\\w::\\w", all_functions$function_name))
   operators <- operators$term

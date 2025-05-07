@@ -36,7 +36,7 @@ cli::cli_text("Please enter the number for a deck or 0 to exit: ")
 # choose_deck("r4ds", choice = 2)
 
 ## ----eval = FALSE-------------------------------------------------------------
-# flashcard("r4ds3")
+# flashcard("r4ds03")
 
 ## -----------------------------------------------------------------------------
 my_deck <- read.csv("../inst/extdata/operators.csv")

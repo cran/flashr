@@ -403,126 +403,215 @@ moment, available themes are <code>black</code>, <code>white</code>,
 <p>Currently, <code>{flashr}</code> includes a few example decks
 (<code>data_types</code>, <code>vectors</code>) and decks of functions
 and arguments derived from <a href="https://r4ds.had.co.nz/">R for Data
-Science (first edition)</a>. These decks are housed at the <a href="https://github.com/JeffreyRStevens/flashr_decks">flashr_decks
-GitHub repo</a>, and more are on the way.</p>
+Science (first edition)</a> and <a href="https://r4ds.hadley.nz/">R for
+Data Science, second edition</a>. These decks are housed at the <a href="https://github.com/JeffreyRStevens/flashr_decks">flashr_decks
+GitHub repo</a>.</p>
 <p>To see what decks are available, use <a href="https://jeffreyrstevens.github.io/flashr/reference/list_decks.html"><code>list_decks()</code></a>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">list_decks</span>()</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; Available flashcard decks</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; 1. Data types (data_types)</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; 2. Operators (operators)</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; 3. PsyTeachR ADS Ch. 1 (psyteachr_ads1)</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; 4. PsyTeachR ADS Ch. 2 (psyteachr_ads2)</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; 5. PsyTeachR ADS Ch. 3 (psyteachr_ads3)</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; 6. PsyTeachR ADS Ch. 4 (psyteachr_ads4)</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; 7. PsyTeachR ADS Ch. 5 (psyteachr_ads5)</span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; 8. PsyTeachR ADS Ch. 7 (psyteachr_ads7)</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; 9. PsyTeachR ADS Ch. 8 (psyteachr_ads8)</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 10. PsyTeachR ADS Ch. 9 (psyteachr_ads9)</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 11. PsyTeachR DSRR Ch. 1 (psyteachr_dsrr1)</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; 12. PsyTeachR DSRR Ch. 2 (psyteachr_dsrr2)</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; 13. PsyTeachR DSRR Ch. 3 (psyteachr_dsrr3)</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; 14. PsyTeachR DSRR Ch. 4 (psyteachr_dsrr4)</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; 15. PsyTeachR DSRR Ch. 5 (psyteachr_dsrr5)</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; 16. PsyTeachR DSRR Ch. 6 (psyteachr_dsrr6)</span></span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co">#&gt; 17. PsyTeachR DSRR Ch. 7 (psyteachr_dsrr7)</span></span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#&gt; 18. PsyTeachR DSRR Ch. 8 (psyteachr_dsrr8)</span></span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co">#&gt; 19. PsyTeachR DSRR Ch. 9 (psyteachr_dsrr9)</span></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co">#&gt; 20. PsyTeachR DSRR Ch. 10 (psyteachr_dsrr10)</span></span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="co">#&gt; 21. PsyTeachR FQA Ch. 1 (psyteachr_fqa1)</span></span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="co">#&gt; 22. PsyTeachR FQA Ch. 2 (psyteachr_fqa2)</span></span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="co">#&gt; 23. PsyTeachR FQA Ch. 3 (psyteachr_fqa3)</span></span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="co">#&gt; 24. PsyTeachR FQA Ch. 4 (psyteachr_fqa4)</span></span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="co">#&gt; 25. PsyTeachR FQA Ch. 5 (psyteachr_fqa5)</span></span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="co">#&gt; 26. PsyTeachR FQA Ch. 6 (psyteachr_fqa6)</span></span>
-<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="co">#&gt; 27. PsyTeachR FQA Ch. 7 (psyteachr_fqa7)</span></span>
-<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a><span class="co">#&gt; 28. PsyTeachR FQA Ch. 8 (psyteachr_fqa8)</span></span>
-<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a><span class="co">#&gt; 29. PsyTeachR FQA Ch. 9 (psyteachr_fqa9)</span></span>
-<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a><span class="co">#&gt; 30. PsyTeachR FQA Ch. 10 (psyteachr_fqa10)</span></span>
-<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a><span class="co">#&gt; 31. PsyTeachR FQA Ch. 11 (psyteachr_fqa11)</span></span>
-<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a><span class="co">#&gt; 32. R4DS Ch. 1 (r4ds1)</span></span>
-<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a><span class="co">#&gt; 33. R4DS Ch. 3 (r4ds3)</span></span>
-<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a><span class="co">#&gt; 34. R4DS Ch. 5 (r4ds5)</span></span>
-<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a><span class="co">#&gt; 35. R4DS Ch. 7 (r4ds7)</span></span>
-<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a><span class="co">#&gt; 36. R4DS Ch. 8 (r4ds8)</span></span>
-<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a><span class="co">#&gt; 37. R4DS Ch. 10 (r4ds10)</span></span>
-<span id="cb6-40"><a href="#cb6-40" tabindex="-1"></a><span class="co">#&gt; 38. R4DS Ch. 11 (r4ds11)</span></span>
-<span id="cb6-41"><a href="#cb6-41" tabindex="-1"></a><span class="co">#&gt; 39. R4DS Ch. 12 (r4ds12)</span></span>
-<span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a><span class="co">#&gt; 40. R4DS Ch. 13 (r4ds13)</span></span>
-<span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a><span class="co">#&gt; 41. R4DS Ch. 14 (r4ds14)</span></span>
-<span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a><span class="co">#&gt; 42. R4DS Ch. 15 (r4ds15)</span></span>
-<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a><span class="co">#&gt; 43. R4DS Ch. 16 (r4ds16)</span></span>
-<span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a><span class="co">#&gt; 44. R4DS Ch. 18 (r4ds18)</span></span>
-<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a><span class="co">#&gt; 45. R4DS Ch. 19 (r4ds19)</span></span>
-<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a><span class="co">#&gt; 46. R4DS Ch. 20 (r4ds20)</span></span>
-<span id="cb6-49"><a href="#cb6-49" tabindex="-1"></a><span class="co">#&gt; 47. R4DS Ch. 21 (r4ds21)</span></span>
-<span id="cb6-50"><a href="#cb6-50" tabindex="-1"></a><span class="co">#&gt; 48. R4DS Ch. 23 (r4ds23)</span></span>
-<span id="cb6-51"><a href="#cb6-51" tabindex="-1"></a><span class="co">#&gt; 49. R4DS Ch. 25 (r4ds25)</span></span>
-<span id="cb6-52"><a href="#cb6-52" tabindex="-1"></a><span class="co">#&gt; 50. R4DS Ch. 27 (r4ds27)</span></span>
-<span id="cb6-53"><a href="#cb6-53" tabindex="-1"></a><span class="co">#&gt; 51. R4DS Ch. 28 (r4ds28)</span></span>
-<span id="cb6-54"><a href="#cb6-54" tabindex="-1"></a><span class="co">#&gt; 52. R4DS Ch. 29 (r4ds29)</span></span>
-<span id="cb6-55"><a href="#cb6-55" tabindex="-1"></a><span class="co">#&gt; 53. R4DS Ch. 30 (r4ds30)</span></span>
-<span id="cb6-56"><a href="#cb6-56" tabindex="-1"></a><span class="co">#&gt; 54. Vectors (vectors)</span></span></code></pre></div>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; 3. psyteachr_ads Ch. 01 (psyteachr_ads01)</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; 4. psyteachr_ads Ch. 02 (psyteachr_ads02)</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; 5. psyteachr_ads Ch. 03 (psyteachr_ads03)</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; 6. psyteachr_ads Ch. 04 (psyteachr_ads04)</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; 7. psyteachr_ads Ch. 07 (psyteachr_ads07)</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; 8. psyteachr_ads Ch. 08 (psyteachr_ads08)</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; 9. psyteachr_ads Ch. 09 (psyteachr_ads09)</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 10. psyteachr_ads Ch. 10 (psyteachr_ads10)</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 11. psyteachr_dsrr Ch. 01 (psyteachr_dsrr01)</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; 12. psyteachr_dsrr Ch. 02 (psyteachr_dsrr02)</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; 13. psyteachr_dsrr Ch. 03 (psyteachr_dsrr03)</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; 14. psyteachr_dsrr Ch. 04 (psyteachr_dsrr04)</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; 15. psyteachr_dsrr Ch. 05 (psyteachr_dsrr05)</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; 16. psyteachr_dsrr Ch. 06 (psyteachr_dsrr06)</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co">#&gt; 17. psyteachr_dsrr Ch. 07 (psyteachr_dsrr07)</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#&gt; 18. psyteachr_dsrr Ch. 08 (psyteachr_dsrr08)</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co">#&gt; 19. psyteachr_dsrr Ch. 09 (psyteachr_dsrr09)</span></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co">#&gt; 20. psyteachr_dsrr Ch. 10 (psyteachr_dsrr10)</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="co">#&gt; 21. psyteachr_fqa Ch. 01 (psyteachr_fqa01)</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="co">#&gt; 22. psyteachr_fqa Ch. 02 (psyteachr_fqa02)</span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="co">#&gt; 23. psyteachr_fqa Ch. 03 (psyteachr_fqa03)</span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="co">#&gt; 24. psyteachr_fqa Ch. 04 (psyteachr_fqa04)</span></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="co">#&gt; 25. psyteachr_fqa Ch. 05 (psyteachr_fqa05)</span></span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="co">#&gt; 26. psyteachr_fqa Ch. 06 (psyteachr_fqa06)</span></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="co">#&gt; 27. psyteachr_fqa Ch. 07 (psyteachr_fqa07)</span></span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a><span class="co">#&gt; 28. psyteachr_fqa Ch. 08 (psyteachr_fqa08)</span></span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a><span class="co">#&gt; 29. psyteachr_fqa Ch. 09 (psyteachr_fqa09)</span></span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a><span class="co">#&gt; 30. psyteachr_fqa Ch. 10 (psyteachr_fqa10)</span></span>
+<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a><span class="co">#&gt; 31. psyteachr_fqa Ch. 11 (psyteachr_fqa11)</span></span>
+<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a><span class="co">#&gt; 32. psyteachr_fqa Ch. 12 (psyteachr_fqa12)</span></span>
+<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a><span class="co">#&gt; 33. psyteachr_fqa Ch. 13 (psyteachr_fqa13)</span></span>
+<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a><span class="co">#&gt; 34. psyteachr_fqa Ch. 14 (psyteachr_fqa14)</span></span>
+<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a><span class="co">#&gt; 35. psyteachr_fqa Ch. 15 (psyteachr_fqa15)</span></span>
+<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a><span class="co">#&gt; 36. R4DS-2e Ch. 00 (r4ds-2e00)</span></span>
+<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a><span class="co">#&gt; 37. R4DS-2e Ch. 01 (r4ds-2e01)</span></span>
+<span id="cb6-40"><a href="#cb6-40" tabindex="-1"></a><span class="co">#&gt; 38. R4DS-2e Ch. 02 (r4ds-2e02)</span></span>
+<span id="cb6-41"><a href="#cb6-41" tabindex="-1"></a><span class="co">#&gt; 39. R4DS-2e Ch. 03 (r4ds-2e03)</span></span>
+<span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a><span class="co">#&gt; 40. R4DS-2e Ch. 04 (r4ds-2e04)</span></span>
+<span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a><span class="co">#&gt; 41. R4DS-2e Ch. 05 (r4ds-2e05)</span></span>
+<span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a><span class="co">#&gt; 42. R4DS-2e Ch. 07 (r4ds-2e07)</span></span>
+<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a><span class="co">#&gt; 43. R4DS-2e Ch. 09 (r4ds-2e09)</span></span>
+<span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a><span class="co">#&gt; 44. R4DS-2e Ch. 10 (r4ds-2e10)</span></span>
+<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a><span class="co">#&gt; 45. R4DS-2e Ch. 11 (r4ds-2e11)</span></span>
+<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a><span class="co">#&gt; 46. R4DS-2e Ch. 12 (r4ds-2e12)</span></span>
+<span id="cb6-49"><a href="#cb6-49" tabindex="-1"></a><span class="co">#&gt; 47. R4DS-2e Ch. 13 (r4ds-2e13)</span></span>
+<span id="cb6-50"><a href="#cb6-50" tabindex="-1"></a><span class="co">#&gt; 48. R4DS-2e Ch. 14 (r4ds-2e14)</span></span>
+<span id="cb6-51"><a href="#cb6-51" tabindex="-1"></a><span class="co">#&gt; 49. R4DS-2e Ch. 15 (r4ds-2e15)</span></span>
+<span id="cb6-52"><a href="#cb6-52" tabindex="-1"></a><span class="co">#&gt; 50. R4DS-2e Ch. 16 (r4ds-2e16)</span></span>
+<span id="cb6-53"><a href="#cb6-53" tabindex="-1"></a><span class="co">#&gt; 51. R4DS-2e Ch. 17 (r4ds-2e17)</span></span>
+<span id="cb6-54"><a href="#cb6-54" tabindex="-1"></a><span class="co">#&gt; 52. R4DS-2e Ch. 18 (r4ds-2e18)</span></span>
+<span id="cb6-55"><a href="#cb6-55" tabindex="-1"></a><span class="co">#&gt; 53. R4DS-2e Ch. 19 (r4ds-2e19)</span></span>
+<span id="cb6-56"><a href="#cb6-56" tabindex="-1"></a><span class="co">#&gt; 54. R4DS-2e Ch. 20 (r4ds-2e20)</span></span>
+<span id="cb6-57"><a href="#cb6-57" tabindex="-1"></a><span class="co">#&gt; 55. R4DS-2e Ch. 21 (r4ds-2e21)</span></span>
+<span id="cb6-58"><a href="#cb6-58" tabindex="-1"></a><span class="co">#&gt; 56. R4DS-2e Ch. 22 (r4ds-2e22)</span></span>
+<span id="cb6-59"><a href="#cb6-59" tabindex="-1"></a><span class="co">#&gt; 57. R4DS-2e Ch. 23 (r4ds-2e23)</span></span>
+<span id="cb6-60"><a href="#cb6-60" tabindex="-1"></a><span class="co">#&gt; 58. R4DS-2e Ch. 24 (r4ds-2e24)</span></span>
+<span id="cb6-61"><a href="#cb6-61" tabindex="-1"></a><span class="co">#&gt; 59. R4DS-2e Ch. 25 (r4ds-2e25)</span></span>
+<span id="cb6-62"><a href="#cb6-62" tabindex="-1"></a><span class="co">#&gt; 60. R4DS-2e Ch. 26 (r4ds-2e26)</span></span>
+<span id="cb6-63"><a href="#cb6-63" tabindex="-1"></a><span class="co">#&gt; 61. R4DS-2e Ch. 27 (r4ds-2e27)</span></span>
+<span id="cb6-64"><a href="#cb6-64" tabindex="-1"></a><span class="co">#&gt; 62. R4DS-2e Ch. 28 (r4ds-2e28)</span></span>
+<span id="cb6-65"><a href="#cb6-65" tabindex="-1"></a><span class="co">#&gt; 63. R4DS-2e Ch. 29 (r4ds-2e29)</span></span>
+<span id="cb6-66"><a href="#cb6-66" tabindex="-1"></a><span class="co">#&gt; 64. R4DS Ch. 1 (r4ds01)</span></span>
+<span id="cb6-67"><a href="#cb6-67" tabindex="-1"></a><span class="co">#&gt; 65. R4DS Ch. 3 (r4ds03)</span></span>
+<span id="cb6-68"><a href="#cb6-68" tabindex="-1"></a><span class="co">#&gt; 66. R4DS Ch. 5 (r4ds05)</span></span>
+<span id="cb6-69"><a href="#cb6-69" tabindex="-1"></a><span class="co">#&gt; 67. R4DS Ch. 7 (r4ds07)</span></span>
+<span id="cb6-70"><a href="#cb6-70" tabindex="-1"></a><span class="co">#&gt; 68. R4DS Ch. 8 (r4ds08)</span></span>
+<span id="cb6-71"><a href="#cb6-71" tabindex="-1"></a><span class="co">#&gt; 69. R4DS Ch. 10 (r4ds10)</span></span>
+<span id="cb6-72"><a href="#cb6-72" tabindex="-1"></a><span class="co">#&gt; 70. R4DS Ch. 11 (r4ds11)</span></span>
+<span id="cb6-73"><a href="#cb6-73" tabindex="-1"></a><span class="co">#&gt; 71. R4DS Ch. 12 (r4ds12)</span></span>
+<span id="cb6-74"><a href="#cb6-74" tabindex="-1"></a><span class="co">#&gt; 72. R4DS Ch. 13 (r4ds13)</span></span>
+<span id="cb6-75"><a href="#cb6-75" tabindex="-1"></a><span class="co">#&gt; 73. R4DS Ch. 14 (r4ds14)</span></span>
+<span id="cb6-76"><a href="#cb6-76" tabindex="-1"></a><span class="co">#&gt; 74. R4DS Ch. 15 (r4ds15)</span></span>
+<span id="cb6-77"><a href="#cb6-77" tabindex="-1"></a><span class="co">#&gt; 75. R4DS Ch. 16 (r4ds16)</span></span>
+<span id="cb6-78"><a href="#cb6-78" tabindex="-1"></a><span class="co">#&gt; 76. R4DS Ch. 18 (r4ds18)</span></span>
+<span id="cb6-79"><a href="#cb6-79" tabindex="-1"></a><span class="co">#&gt; 77. R4DS Ch. 19 (r4ds19)</span></span>
+<span id="cb6-80"><a href="#cb6-80" tabindex="-1"></a><span class="co">#&gt; 78. R4DS Ch. 20 (r4ds20)</span></span>
+<span id="cb6-81"><a href="#cb6-81" tabindex="-1"></a><span class="co">#&gt; 79. R4DS Ch. 21 (r4ds21)</span></span>
+<span id="cb6-82"><a href="#cb6-82" tabindex="-1"></a><span class="co">#&gt; 80. R4DS Ch. 23 (r4ds23)</span></span>
+<span id="cb6-83"><a href="#cb6-83" tabindex="-1"></a><span class="co">#&gt; 81. R4DS Ch. 25 (r4ds25)</span></span>
+<span id="cb6-84"><a href="#cb6-84" tabindex="-1"></a><span class="co">#&gt; 82. R4DS Ch. 27 (r4ds27)</span></span>
+<span id="cb6-85"><a href="#cb6-85" tabindex="-1"></a><span class="co">#&gt; 83. R4DS Ch. 28 (r4ds28)</span></span>
+<span id="cb6-86"><a href="#cb6-86" tabindex="-1"></a><span class="co">#&gt; 84. R4DS Ch. 29 (r4ds29)</span></span>
+<span id="cb6-87"><a href="#cb6-87" tabindex="-1"></a><span class="co">#&gt; 85. R4DS Ch. 30 (r4ds30)</span></span>
+<span id="cb6-88"><a href="#cb6-88" tabindex="-1"></a><span class="co">#&gt; 86. Vectors (vectors)</span></span></code></pre></div>
 <p>Note that the list of decks includes the deck names in parenthesis
 next to the descriptions. For instance, for <em>R4DS Chapter 3</em>, the
-name is <code>r4ds3</code>.</p>
+name is <code>r4ds03</code>.</p>
 <p>This function includes pattern matching. So if you want to narrow you
 list down, add a search string.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">list_decks</span>(<span class="at">pattern =</span> <span class="st">&quot;r4ds&quot;</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#&gt; Available flashcard decks</span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; 1. R4DS Ch. 1 (r4ds1)</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt; 2. R4DS Ch. 3 (r4ds3)</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; 3. R4DS Ch. 5 (r4ds5)</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt; 4. R4DS Ch. 7 (r4ds7)</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; 5. R4DS Ch. 8 (r4ds8)</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt; 6. R4DS Ch. 10 (r4ds10)</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt; 7. R4DS Ch. 11 (r4ds11)</span></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt; 8. R4DS Ch. 12 (r4ds12)</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; 9. R4DS Ch. 13 (r4ds13)</span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; 10. R4DS Ch. 14 (r4ds14)</span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; 11. R4DS Ch. 15 (r4ds15)</span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co">#&gt; 12. R4DS Ch. 16 (r4ds16)</span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="co">#&gt; 13. R4DS Ch. 18 (r4ds18)</span></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="co">#&gt; 14. R4DS Ch. 19 (r4ds19)</span></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="co">#&gt; 15. R4DS Ch. 20 (r4ds20)</span></span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co">#&gt; 16. R4DS Ch. 21 (r4ds21)</span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co">#&gt; 17. R4DS Ch. 23 (r4ds23)</span></span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co">#&gt; 18. R4DS Ch. 25 (r4ds25)</span></span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="co">#&gt; 19. R4DS Ch. 27 (r4ds27)</span></span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co">#&gt; 20. R4DS Ch. 28 (r4ds28)</span></span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co">#&gt; 21. R4DS Ch. 29 (r4ds29)</span></span>
-<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="co">#&gt; 22. R4DS Ch. 30 (r4ds30)</span></span></code></pre></div>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; 1. R4DS-2e Ch. 00 (r4ds-2e00)</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt; 2. R4DS-2e Ch. 01 (r4ds-2e01)</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; 3. R4DS-2e Ch. 02 (r4ds-2e02)</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt; 4. R4DS-2e Ch. 03 (r4ds-2e03)</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; 5. R4DS-2e Ch. 04 (r4ds-2e04)</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt; 6. R4DS-2e Ch. 05 (r4ds-2e05)</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt; 7. R4DS-2e Ch. 07 (r4ds-2e07)</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt; 8. R4DS-2e Ch. 09 (r4ds-2e09)</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; 9. R4DS-2e Ch. 10 (r4ds-2e10)</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; 10. R4DS-2e Ch. 11 (r4ds-2e11)</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; 11. R4DS-2e Ch. 12 (r4ds-2e12)</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co">#&gt; 12. R4DS-2e Ch. 13 (r4ds-2e13)</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="co">#&gt; 13. R4DS-2e Ch. 14 (r4ds-2e14)</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="co">#&gt; 14. R4DS-2e Ch. 15 (r4ds-2e15)</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="co">#&gt; 15. R4DS-2e Ch. 16 (r4ds-2e16)</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co">#&gt; 16. R4DS-2e Ch. 17 (r4ds-2e17)</span></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co">#&gt; 17. R4DS-2e Ch. 18 (r4ds-2e18)</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co">#&gt; 18. R4DS-2e Ch. 19 (r4ds-2e19)</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="co">#&gt; 19. R4DS-2e Ch. 20 (r4ds-2e20)</span></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co">#&gt; 20. R4DS-2e Ch. 21 (r4ds-2e21)</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co">#&gt; 21. R4DS-2e Ch. 22 (r4ds-2e22)</span></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="co">#&gt; 22. R4DS-2e Ch. 23 (r4ds-2e23)</span></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="co">#&gt; 23. R4DS-2e Ch. 24 (r4ds-2e24)</span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="co">#&gt; 24. R4DS-2e Ch. 25 (r4ds-2e25)</span></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="co">#&gt; 25. R4DS-2e Ch. 26 (r4ds-2e26)</span></span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="co">#&gt; 26. R4DS-2e Ch. 27 (r4ds-2e27)</span></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co">#&gt; 27. R4DS-2e Ch. 28 (r4ds-2e28)</span></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a><span class="co">#&gt; 28. R4DS-2e Ch. 29 (r4ds-2e29)</span></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a><span class="co">#&gt; 29. R4DS Ch. 1 (r4ds01)</span></span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a><span class="co">#&gt; 30. R4DS Ch. 3 (r4ds03)</span></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a><span class="co">#&gt; 31. R4DS Ch. 5 (r4ds05)</span></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a><span class="co">#&gt; 32. R4DS Ch. 7 (r4ds07)</span></span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a><span class="co">#&gt; 33. R4DS Ch. 8 (r4ds08)</span></span>
+<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a><span class="co">#&gt; 34. R4DS Ch. 10 (r4ds10)</span></span>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a><span class="co">#&gt; 35. R4DS Ch. 11 (r4ds11)</span></span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a><span class="co">#&gt; 36. R4DS Ch. 12 (r4ds12)</span></span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a><span class="co">#&gt; 37. R4DS Ch. 13 (r4ds13)</span></span>
+<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a><span class="co">#&gt; 38. R4DS Ch. 14 (r4ds14)</span></span>
+<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a><span class="co">#&gt; 39. R4DS Ch. 15 (r4ds15)</span></span>
+<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a><span class="co">#&gt; 40. R4DS Ch. 16 (r4ds16)</span></span>
+<span id="cb7-43"><a href="#cb7-43" tabindex="-1"></a><span class="co">#&gt; 41. R4DS Ch. 18 (r4ds18)</span></span>
+<span id="cb7-44"><a href="#cb7-44" tabindex="-1"></a><span class="co">#&gt; 42. R4DS Ch. 19 (r4ds19)</span></span>
+<span id="cb7-45"><a href="#cb7-45" tabindex="-1"></a><span class="co">#&gt; 43. R4DS Ch. 20 (r4ds20)</span></span>
+<span id="cb7-46"><a href="#cb7-46" tabindex="-1"></a><span class="co">#&gt; 44. R4DS Ch. 21 (r4ds21)</span></span>
+<span id="cb7-47"><a href="#cb7-47" tabindex="-1"></a><span class="co">#&gt; 45. R4DS Ch. 23 (r4ds23)</span></span>
+<span id="cb7-48"><a href="#cb7-48" tabindex="-1"></a><span class="co">#&gt; 46. R4DS Ch. 25 (r4ds25)</span></span>
+<span id="cb7-49"><a href="#cb7-49" tabindex="-1"></a><span class="co">#&gt; 47. R4DS Ch. 27 (r4ds27)</span></span>
+<span id="cb7-50"><a href="#cb7-50" tabindex="-1"></a><span class="co">#&gt; 48. R4DS Ch. 28 (r4ds28)</span></span>
+<span id="cb7-51"><a href="#cb7-51" tabindex="-1"></a><span class="co">#&gt; 49. R4DS Ch. 29 (r4ds29)</span></span>
+<span id="cb7-52"><a href="#cb7-52" tabindex="-1"></a><span class="co">#&gt; 50. R4DS Ch. 30 (r4ds30)</span></span></code></pre></div>
 <p>If you want to list the decks and then choose one, use <a href="https://jeffreyrstevens.github.io/flashr/reference/choose_deck.html"><code>choose_deck()</code></a>:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">choose_deck</span>(<span class="st">&quot;r4ds&quot;</span>)</span></code></pre></div>
 <pre><code>#&gt; Available flashcard decks
-#&gt; 1. R4DS Ch. 1 (r4ds1)
-#&gt; 2. R4DS Ch. 3 (r4ds3)
-#&gt; 3. R4DS Ch. 5 (r4ds5)
-#&gt; 4. R4DS Ch. 7 (r4ds7)
-#&gt; 5. R4DS Ch. 8 (r4ds8)
-#&gt; 6. R4DS Ch. 10 (r4ds10)
-#&gt; 7. R4DS Ch. 11 (r4ds11)
-#&gt; 8. R4DS Ch. 12 (r4ds12)
-#&gt; 9. R4DS Ch. 13 (r4ds13)
-#&gt; 10. R4DS Ch. 14 (r4ds14)
-#&gt; 11. R4DS Ch. 15 (r4ds15)
-#&gt; 12. R4DS Ch. 16 (r4ds16)
-#&gt; 13. R4DS Ch. 18 (r4ds18)
-#&gt; 14. R4DS Ch. 19 (r4ds19)
-#&gt; 15. R4DS Ch. 20 (r4ds20)
-#&gt; 16. R4DS Ch. 21 (r4ds21)
-#&gt; 17. R4DS Ch. 23 (r4ds23)
-#&gt; 18. R4DS Ch. 25 (r4ds25)
-#&gt; 19. R4DS Ch. 27 (r4ds27)
-#&gt; 20. R4DS Ch. 28 (r4ds28)
-#&gt; 21. R4DS Ch. 29 (r4ds29)
-#&gt; 22. R4DS Ch. 30 (r4ds30)
+#&gt; 1. R4DS-2e Ch. 00 (r4ds-2e00)
+#&gt; 2. R4DS-2e Ch. 01 (r4ds-2e01)
+#&gt; 3. R4DS-2e Ch. 02 (r4ds-2e02)
+#&gt; 4. R4DS-2e Ch. 03 (r4ds-2e03)
+#&gt; 5. R4DS-2e Ch. 04 (r4ds-2e04)
+#&gt; 6. R4DS-2e Ch. 05 (r4ds-2e05)
+#&gt; 7. R4DS-2e Ch. 07 (r4ds-2e07)
+#&gt; 8. R4DS-2e Ch. 09 (r4ds-2e09)
+#&gt; 9. R4DS-2e Ch. 10 (r4ds-2e10)
+#&gt; 10. R4DS-2e Ch. 11 (r4ds-2e11)
+#&gt; 11. R4DS-2e Ch. 12 (r4ds-2e12)
+#&gt; 12. R4DS-2e Ch. 13 (r4ds-2e13)
+#&gt; 13. R4DS-2e Ch. 14 (r4ds-2e14)
+#&gt; 14. R4DS-2e Ch. 15 (r4ds-2e15)
+#&gt; 15. R4DS-2e Ch. 16 (r4ds-2e16)
+#&gt; 16. R4DS-2e Ch. 17 (r4ds-2e17)
+#&gt; 17. R4DS-2e Ch. 18 (r4ds-2e18)
+#&gt; 18. R4DS-2e Ch. 19 (r4ds-2e19)
+#&gt; 19. R4DS-2e Ch. 20 (r4ds-2e20)
+#&gt; 20. R4DS-2e Ch. 21 (r4ds-2e21)
+#&gt; 21. R4DS-2e Ch. 22 (r4ds-2e22)
+#&gt; 22. R4DS-2e Ch. 23 (r4ds-2e23)
+#&gt; 23. R4DS-2e Ch. 24 (r4ds-2e24)
+#&gt; 24. R4DS-2e Ch. 25 (r4ds-2e25)
+#&gt; 25. R4DS-2e Ch. 26 (r4ds-2e26)
+#&gt; 26. R4DS-2e Ch. 27 (r4ds-2e27)
+#&gt; 27. R4DS-2e Ch. 28 (r4ds-2e28)
+#&gt; 28. R4DS-2e Ch. 29 (r4ds-2e29)
+#&gt; 29. R4DS Ch. 1 (r4ds01)
+#&gt; 30. R4DS Ch. 3 (r4ds03)
+#&gt; 31. R4DS Ch. 5 (r4ds05)
+#&gt; 32. R4DS Ch. 7 (r4ds07)
+#&gt; 33. R4DS Ch. 8 (r4ds08)
+#&gt; 34. R4DS Ch. 10 (r4ds10)
+#&gt; 35. R4DS Ch. 11 (r4ds11)
+#&gt; 36. R4DS Ch. 12 (r4ds12)
+#&gt; 37. R4DS Ch. 13 (r4ds13)
+#&gt; 38. R4DS Ch. 14 (r4ds14)
+#&gt; 39. R4DS Ch. 15 (r4ds15)
+#&gt; 40. R4DS Ch. 16 (r4ds16)
+#&gt; 41. R4DS Ch. 18 (r4ds18)
+#&gt; 42. R4DS Ch. 19 (r4ds19)
+#&gt; 43. R4DS Ch. 20 (r4ds20)
+#&gt; 44. R4DS Ch. 21 (r4ds21)
+#&gt; 45. R4DS Ch. 23 (r4ds23)
+#&gt; 46. R4DS Ch. 25 (r4ds25)
+#&gt; 47. R4DS Ch. 27 (r4ds27)
+#&gt; 48. R4DS Ch. 28 (r4ds28)
+#&gt; 49. R4DS Ch. 29 (r4ds29)
+#&gt; 50. R4DS Ch. 30 (r4ds30)
 #&gt; Please enter the number for a deck or 0 to exit:</code></pre>
 <p>Or, if you already know the deck number that you want, you can
 include it in the <code>choice</code> argument.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">choose_deck</span>(<span class="st">&quot;r4ds&quot;</span>, <span class="at">choice =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>Of course, a faster way to do this is to enter the deck name directly
 into <a href="https://jeffreyrstevens.github.io/flashr/reference/flashcard.html"><code>flashcard()</code></a>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">flashcard</span>(<span class="st">&quot;r4ds3&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">flashcard</span>(<span class="st">&quot;r4ds03&quot;</span>)</span></code></pre></div>
 <p>You can also view <a href="https://jeffreyrstevens.github.io/flashr_decks/decks.html">examples
 of all of the decks in HTML</a>.</p>
 </div>
@@ -704,58 +793,90 @@ saved in a <code>decks/</code> folder in your repo’s root directory.</p>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co">#&gt; Available flashcard decks</span></span>
 <span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#&gt; 1. Data types (data_types)</span></span>
 <span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co">#&gt; 2. Operators (operators)</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; 3. PsyTeachR ADS Ch. 1 (psyteachr_ads1)</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">#&gt; 4. PsyTeachR ADS Ch. 2 (psyteachr_ads2)</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co">#&gt; 5. PsyTeachR ADS Ch. 3 (psyteachr_ads3)</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">#&gt; 6. PsyTeachR ADS Ch. 4 (psyteachr_ads4)</span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">#&gt; 7. PsyTeachR ADS Ch. 5 (psyteachr_ads5)</span></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co">#&gt; 8. PsyTeachR ADS Ch. 7 (psyteachr_ads7)</span></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co">#&gt; 9. PsyTeachR ADS Ch. 8 (psyteachr_ads8)</span></span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="co">#&gt; 10. PsyTeachR ADS Ch. 9 (psyteachr_ads9)</span></span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="co">#&gt; 11. PsyTeachR DSRR Ch. 1 (psyteachr_dsrr1)</span></span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="co">#&gt; 12. PsyTeachR DSRR Ch. 2 (psyteachr_dsrr2)</span></span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="co">#&gt; 13. PsyTeachR DSRR Ch. 3 (psyteachr_dsrr3)</span></span>
-<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a><span class="co">#&gt; 14. PsyTeachR DSRR Ch. 4 (psyteachr_dsrr4)</span></span>
-<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="co">#&gt; 15. PsyTeachR DSRR Ch. 5 (psyteachr_dsrr5)</span></span>
-<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a><span class="co">#&gt; 16. PsyTeachR DSRR Ch. 6 (psyteachr_dsrr6)</span></span>
-<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a><span class="co">#&gt; 17. PsyTeachR DSRR Ch. 7 (psyteachr_dsrr7)</span></span>
-<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a><span class="co">#&gt; 18. PsyTeachR DSRR Ch. 8 (psyteachr_dsrr8)</span></span>
-<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co">#&gt; 19. PsyTeachR DSRR Ch. 9 (psyteachr_dsrr9)</span></span>
-<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co">#&gt; 20. PsyTeachR DSRR Ch. 10 (psyteachr_dsrr10)</span></span>
-<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="co">#&gt; 21. PsyTeachR FQA Ch. 1 (psyteachr_fqa1)</span></span>
-<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a><span class="co">#&gt; 22. PsyTeachR FQA Ch. 2 (psyteachr_fqa2)</span></span>
-<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co">#&gt; 23. PsyTeachR FQA Ch. 3 (psyteachr_fqa3)</span></span>
-<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a><span class="co">#&gt; 24. PsyTeachR FQA Ch. 4 (psyteachr_fqa4)</span></span>
-<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a><span class="co">#&gt; 25. PsyTeachR FQA Ch. 5 (psyteachr_fqa5)</span></span>
-<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a><span class="co">#&gt; 26. PsyTeachR FQA Ch. 6 (psyteachr_fqa6)</span></span>
-<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co">#&gt; 27. PsyTeachR FQA Ch. 7 (psyteachr_fqa7)</span></span>
-<span id="cb13-30"><a href="#cb13-30" tabindex="-1"></a><span class="co">#&gt; 28. PsyTeachR FQA Ch. 8 (psyteachr_fqa8)</span></span>
-<span id="cb13-31"><a href="#cb13-31" tabindex="-1"></a><span class="co">#&gt; 29. PsyTeachR FQA Ch. 9 (psyteachr_fqa9)</span></span>
-<span id="cb13-32"><a href="#cb13-32" tabindex="-1"></a><span class="co">#&gt; 30. PsyTeachR FQA Ch. 10 (psyteachr_fqa10)</span></span>
-<span id="cb13-33"><a href="#cb13-33" tabindex="-1"></a><span class="co">#&gt; 31. PsyTeachR FQA Ch. 11 (psyteachr_fqa11)</span></span>
-<span id="cb13-34"><a href="#cb13-34" tabindex="-1"></a><span class="co">#&gt; 32. R4DS Ch. 1 (r4ds1)</span></span>
-<span id="cb13-35"><a href="#cb13-35" tabindex="-1"></a><span class="co">#&gt; 33. R4DS Ch. 3 (r4ds3)</span></span>
-<span id="cb13-36"><a href="#cb13-36" tabindex="-1"></a><span class="co">#&gt; 34. R4DS Ch. 5 (r4ds5)</span></span>
-<span id="cb13-37"><a href="#cb13-37" tabindex="-1"></a><span class="co">#&gt; 35. R4DS Ch. 7 (r4ds7)</span></span>
-<span id="cb13-38"><a href="#cb13-38" tabindex="-1"></a><span class="co">#&gt; 36. R4DS Ch. 8 (r4ds8)</span></span>
-<span id="cb13-39"><a href="#cb13-39" tabindex="-1"></a><span class="co">#&gt; 37. R4DS Ch. 10 (r4ds10)</span></span>
-<span id="cb13-40"><a href="#cb13-40" tabindex="-1"></a><span class="co">#&gt; 38. R4DS Ch. 11 (r4ds11)</span></span>
-<span id="cb13-41"><a href="#cb13-41" tabindex="-1"></a><span class="co">#&gt; 39. R4DS Ch. 12 (r4ds12)</span></span>
-<span id="cb13-42"><a href="#cb13-42" tabindex="-1"></a><span class="co">#&gt; 40. R4DS Ch. 13 (r4ds13)</span></span>
-<span id="cb13-43"><a href="#cb13-43" tabindex="-1"></a><span class="co">#&gt; 41. R4DS Ch. 14 (r4ds14)</span></span>
-<span id="cb13-44"><a href="#cb13-44" tabindex="-1"></a><span class="co">#&gt; 42. R4DS Ch. 15 (r4ds15)</span></span>
-<span id="cb13-45"><a href="#cb13-45" tabindex="-1"></a><span class="co">#&gt; 43. R4DS Ch. 16 (r4ds16)</span></span>
-<span id="cb13-46"><a href="#cb13-46" tabindex="-1"></a><span class="co">#&gt; 44. R4DS Ch. 18 (r4ds18)</span></span>
-<span id="cb13-47"><a href="#cb13-47" tabindex="-1"></a><span class="co">#&gt; 45. R4DS Ch. 19 (r4ds19)</span></span>
-<span id="cb13-48"><a href="#cb13-48" tabindex="-1"></a><span class="co">#&gt; 46. R4DS Ch. 20 (r4ds20)</span></span>
-<span id="cb13-49"><a href="#cb13-49" tabindex="-1"></a><span class="co">#&gt; 47. R4DS Ch. 21 (r4ds21)</span></span>
-<span id="cb13-50"><a href="#cb13-50" tabindex="-1"></a><span class="co">#&gt; 48. R4DS Ch. 23 (r4ds23)</span></span>
-<span id="cb13-51"><a href="#cb13-51" tabindex="-1"></a><span class="co">#&gt; 49. R4DS Ch. 25 (r4ds25)</span></span>
-<span id="cb13-52"><a href="#cb13-52" tabindex="-1"></a><span class="co">#&gt; 50. R4DS Ch. 27 (r4ds27)</span></span>
-<span id="cb13-53"><a href="#cb13-53" tabindex="-1"></a><span class="co">#&gt; 51. R4DS Ch. 28 (r4ds28)</span></span>
-<span id="cb13-54"><a href="#cb13-54" tabindex="-1"></a><span class="co">#&gt; 52. R4DS Ch. 29 (r4ds29)</span></span>
-<span id="cb13-55"><a href="#cb13-55" tabindex="-1"></a><span class="co">#&gt; 53. R4DS Ch. 30 (r4ds30)</span></span>
-<span id="cb13-56"><a href="#cb13-56" tabindex="-1"></a><span class="co">#&gt; 54. Vectors (vectors)</span></span></code></pre></div>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; 3. psyteachr_ads Ch. 01 (psyteachr_ads01)</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">#&gt; 4. psyteachr_ads Ch. 02 (psyteachr_ads02)</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co">#&gt; 5. psyteachr_ads Ch. 03 (psyteachr_ads03)</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">#&gt; 6. psyteachr_ads Ch. 04 (psyteachr_ads04)</span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">#&gt; 7. psyteachr_ads Ch. 07 (psyteachr_ads07)</span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co">#&gt; 8. psyteachr_ads Ch. 08 (psyteachr_ads08)</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co">#&gt; 9. psyteachr_ads Ch. 09 (psyteachr_ads09)</span></span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="co">#&gt; 10. psyteachr_ads Ch. 10 (psyteachr_ads10)</span></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="co">#&gt; 11. psyteachr_dsrr Ch. 01 (psyteachr_dsrr01)</span></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="co">#&gt; 12. psyteachr_dsrr Ch. 02 (psyteachr_dsrr02)</span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="co">#&gt; 13. psyteachr_dsrr Ch. 03 (psyteachr_dsrr03)</span></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a><span class="co">#&gt; 14. psyteachr_dsrr Ch. 04 (psyteachr_dsrr04)</span></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="co">#&gt; 15. psyteachr_dsrr Ch. 05 (psyteachr_dsrr05)</span></span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a><span class="co">#&gt; 16. psyteachr_dsrr Ch. 06 (psyteachr_dsrr06)</span></span>
+<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a><span class="co">#&gt; 17. psyteachr_dsrr Ch. 07 (psyteachr_dsrr07)</span></span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a><span class="co">#&gt; 18. psyteachr_dsrr Ch. 08 (psyteachr_dsrr08)</span></span>
+<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co">#&gt; 19. psyteachr_dsrr Ch. 09 (psyteachr_dsrr09)</span></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co">#&gt; 20. psyteachr_dsrr Ch. 10 (psyteachr_dsrr10)</span></span>
+<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="co">#&gt; 21. psyteachr_fqa Ch. 01 (psyteachr_fqa01)</span></span>
+<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a><span class="co">#&gt; 22. psyteachr_fqa Ch. 02 (psyteachr_fqa02)</span></span>
+<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co">#&gt; 23. psyteachr_fqa Ch. 03 (psyteachr_fqa03)</span></span>
+<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a><span class="co">#&gt; 24. psyteachr_fqa Ch. 04 (psyteachr_fqa04)</span></span>
+<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a><span class="co">#&gt; 25. psyteachr_fqa Ch. 05 (psyteachr_fqa05)</span></span>
+<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a><span class="co">#&gt; 26. psyteachr_fqa Ch. 06 (psyteachr_fqa06)</span></span>
+<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co">#&gt; 27. psyteachr_fqa Ch. 07 (psyteachr_fqa07)</span></span>
+<span id="cb13-30"><a href="#cb13-30" tabindex="-1"></a><span class="co">#&gt; 28. psyteachr_fqa Ch. 08 (psyteachr_fqa08)</span></span>
+<span id="cb13-31"><a href="#cb13-31" tabindex="-1"></a><span class="co">#&gt; 29. psyteachr_fqa Ch. 09 (psyteachr_fqa09)</span></span>
+<span id="cb13-32"><a href="#cb13-32" tabindex="-1"></a><span class="co">#&gt; 30. psyteachr_fqa Ch. 10 (psyteachr_fqa10)</span></span>
+<span id="cb13-33"><a href="#cb13-33" tabindex="-1"></a><span class="co">#&gt; 31. psyteachr_fqa Ch. 11 (psyteachr_fqa11)</span></span>
+<span id="cb13-34"><a href="#cb13-34" tabindex="-1"></a><span class="co">#&gt; 32. psyteachr_fqa Ch. 12 (psyteachr_fqa12)</span></span>
+<span id="cb13-35"><a href="#cb13-35" tabindex="-1"></a><span class="co">#&gt; 33. psyteachr_fqa Ch. 13 (psyteachr_fqa13)</span></span>
+<span id="cb13-36"><a href="#cb13-36" tabindex="-1"></a><span class="co">#&gt; 34. psyteachr_fqa Ch. 14 (psyteachr_fqa14)</span></span>
+<span id="cb13-37"><a href="#cb13-37" tabindex="-1"></a><span class="co">#&gt; 35. psyteachr_fqa Ch. 15 (psyteachr_fqa15)</span></span>
+<span id="cb13-38"><a href="#cb13-38" tabindex="-1"></a><span class="co">#&gt; 36. R4DS-2e Ch. 00 (r4ds-2e00)</span></span>
+<span id="cb13-39"><a href="#cb13-39" tabindex="-1"></a><span class="co">#&gt; 37. R4DS-2e Ch. 01 (r4ds-2e01)</span></span>
+<span id="cb13-40"><a href="#cb13-40" tabindex="-1"></a><span class="co">#&gt; 38. R4DS-2e Ch. 02 (r4ds-2e02)</span></span>
+<span id="cb13-41"><a href="#cb13-41" tabindex="-1"></a><span class="co">#&gt; 39. R4DS-2e Ch. 03 (r4ds-2e03)</span></span>
+<span id="cb13-42"><a href="#cb13-42" tabindex="-1"></a><span class="co">#&gt; 40. R4DS-2e Ch. 04 (r4ds-2e04)</span></span>
+<span id="cb13-43"><a href="#cb13-43" tabindex="-1"></a><span class="co">#&gt; 41. R4DS-2e Ch. 05 (r4ds-2e05)</span></span>
+<span id="cb13-44"><a href="#cb13-44" tabindex="-1"></a><span class="co">#&gt; 42. R4DS-2e Ch. 07 (r4ds-2e07)</span></span>
+<span id="cb13-45"><a href="#cb13-45" tabindex="-1"></a><span class="co">#&gt; 43. R4DS-2e Ch. 09 (r4ds-2e09)</span></span>
+<span id="cb13-46"><a href="#cb13-46" tabindex="-1"></a><span class="co">#&gt; 44. R4DS-2e Ch. 10 (r4ds-2e10)</span></span>
+<span id="cb13-47"><a href="#cb13-47" tabindex="-1"></a><span class="co">#&gt; 45. R4DS-2e Ch. 11 (r4ds-2e11)</span></span>
+<span id="cb13-48"><a href="#cb13-48" tabindex="-1"></a><span class="co">#&gt; 46. R4DS-2e Ch. 12 (r4ds-2e12)</span></span>
+<span id="cb13-49"><a href="#cb13-49" tabindex="-1"></a><span class="co">#&gt; 47. R4DS-2e Ch. 13 (r4ds-2e13)</span></span>
+<span id="cb13-50"><a href="#cb13-50" tabindex="-1"></a><span class="co">#&gt; 48. R4DS-2e Ch. 14 (r4ds-2e14)</span></span>
+<span id="cb13-51"><a href="#cb13-51" tabindex="-1"></a><span class="co">#&gt; 49. R4DS-2e Ch. 15 (r4ds-2e15)</span></span>
+<span id="cb13-52"><a href="#cb13-52" tabindex="-1"></a><span class="co">#&gt; 50. R4DS-2e Ch. 16 (r4ds-2e16)</span></span>
+<span id="cb13-53"><a href="#cb13-53" tabindex="-1"></a><span class="co">#&gt; 51. R4DS-2e Ch. 17 (r4ds-2e17)</span></span>
+<span id="cb13-54"><a href="#cb13-54" tabindex="-1"></a><span class="co">#&gt; 52. R4DS-2e Ch. 18 (r4ds-2e18)</span></span>
+<span id="cb13-55"><a href="#cb13-55" tabindex="-1"></a><span class="co">#&gt; 53. R4DS-2e Ch. 19 (r4ds-2e19)</span></span>
+<span id="cb13-56"><a href="#cb13-56" tabindex="-1"></a><span class="co">#&gt; 54. R4DS-2e Ch. 20 (r4ds-2e20)</span></span>
+<span id="cb13-57"><a href="#cb13-57" tabindex="-1"></a><span class="co">#&gt; 55. R4DS-2e Ch. 21 (r4ds-2e21)</span></span>
+<span id="cb13-58"><a href="#cb13-58" tabindex="-1"></a><span class="co">#&gt; 56. R4DS-2e Ch. 22 (r4ds-2e22)</span></span>
+<span id="cb13-59"><a href="#cb13-59" tabindex="-1"></a><span class="co">#&gt; 57. R4DS-2e Ch. 23 (r4ds-2e23)</span></span>
+<span id="cb13-60"><a href="#cb13-60" tabindex="-1"></a><span class="co">#&gt; 58. R4DS-2e Ch. 24 (r4ds-2e24)</span></span>
+<span id="cb13-61"><a href="#cb13-61" tabindex="-1"></a><span class="co">#&gt; 59. R4DS-2e Ch. 25 (r4ds-2e25)</span></span>
+<span id="cb13-62"><a href="#cb13-62" tabindex="-1"></a><span class="co">#&gt; 60. R4DS-2e Ch. 26 (r4ds-2e26)</span></span>
+<span id="cb13-63"><a href="#cb13-63" tabindex="-1"></a><span class="co">#&gt; 61. R4DS-2e Ch. 27 (r4ds-2e27)</span></span>
+<span id="cb13-64"><a href="#cb13-64" tabindex="-1"></a><span class="co">#&gt; 62. R4DS-2e Ch. 28 (r4ds-2e28)</span></span>
+<span id="cb13-65"><a href="#cb13-65" tabindex="-1"></a><span class="co">#&gt; 63. R4DS-2e Ch. 29 (r4ds-2e29)</span></span>
+<span id="cb13-66"><a href="#cb13-66" tabindex="-1"></a><span class="co">#&gt; 64. R4DS Ch. 1 (r4ds01)</span></span>
+<span id="cb13-67"><a href="#cb13-67" tabindex="-1"></a><span class="co">#&gt; 65. R4DS Ch. 3 (r4ds03)</span></span>
+<span id="cb13-68"><a href="#cb13-68" tabindex="-1"></a><span class="co">#&gt; 66. R4DS Ch. 5 (r4ds05)</span></span>
+<span id="cb13-69"><a href="#cb13-69" tabindex="-1"></a><span class="co">#&gt; 67. R4DS Ch. 7 (r4ds07)</span></span>
+<span id="cb13-70"><a href="#cb13-70" tabindex="-1"></a><span class="co">#&gt; 68. R4DS Ch. 8 (r4ds08)</span></span>
+<span id="cb13-71"><a href="#cb13-71" tabindex="-1"></a><span class="co">#&gt; 69. R4DS Ch. 10 (r4ds10)</span></span>
+<span id="cb13-72"><a href="#cb13-72" tabindex="-1"></a><span class="co">#&gt; 70. R4DS Ch. 11 (r4ds11)</span></span>
+<span id="cb13-73"><a href="#cb13-73" tabindex="-1"></a><span class="co">#&gt; 71. R4DS Ch. 12 (r4ds12)</span></span>
+<span id="cb13-74"><a href="#cb13-74" tabindex="-1"></a><span class="co">#&gt; 72. R4DS Ch. 13 (r4ds13)</span></span>
+<span id="cb13-75"><a href="#cb13-75" tabindex="-1"></a><span class="co">#&gt; 73. R4DS Ch. 14 (r4ds14)</span></span>
+<span id="cb13-76"><a href="#cb13-76" tabindex="-1"></a><span class="co">#&gt; 74. R4DS Ch. 15 (r4ds15)</span></span>
+<span id="cb13-77"><a href="#cb13-77" tabindex="-1"></a><span class="co">#&gt; 75. R4DS Ch. 16 (r4ds16)</span></span>
+<span id="cb13-78"><a href="#cb13-78" tabindex="-1"></a><span class="co">#&gt; 76. R4DS Ch. 18 (r4ds18)</span></span>
+<span id="cb13-79"><a href="#cb13-79" tabindex="-1"></a><span class="co">#&gt; 77. R4DS Ch. 19 (r4ds19)</span></span>
+<span id="cb13-80"><a href="#cb13-80" tabindex="-1"></a><span class="co">#&gt; 78. R4DS Ch. 20 (r4ds20)</span></span>
+<span id="cb13-81"><a href="#cb13-81" tabindex="-1"></a><span class="co">#&gt; 79. R4DS Ch. 21 (r4ds21)</span></span>
+<span id="cb13-82"><a href="#cb13-82" tabindex="-1"></a><span class="co">#&gt; 80. R4DS Ch. 23 (r4ds23)</span></span>
+<span id="cb13-83"><a href="#cb13-83" tabindex="-1"></a><span class="co">#&gt; 81. R4DS Ch. 25 (r4ds25)</span></span>
+<span id="cb13-84"><a href="#cb13-84" tabindex="-1"></a><span class="co">#&gt; 82. R4DS Ch. 27 (r4ds27)</span></span>
+<span id="cb13-85"><a href="#cb13-85" tabindex="-1"></a><span class="co">#&gt; 83. R4DS Ch. 28 (r4ds28)</span></span>
+<span id="cb13-86"><a href="#cb13-86" tabindex="-1"></a><span class="co">#&gt; 84. R4DS Ch. 29 (r4ds29)</span></span>
+<span id="cb13-87"><a href="#cb13-87" tabindex="-1"></a><span class="co">#&gt; 85. R4DS Ch. 30 (r4ds30)</span></span>
+<span id="cb13-88"><a href="#cb13-88" tabindex="-1"></a><span class="co">#&gt; 86. Vectors (vectors)</span></span></code></pre></div>
 </div>
 <div id="drawing-from-list-of-functions" class="section level3">
 <h3>Drawing from list of functions</h3>

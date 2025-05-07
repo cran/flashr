@@ -40,6 +40,12 @@
 list_decks <- function(pattern = NULL,
                        repo = "JeffreyRStevens/flashr_decks",
                        quiet = FALSE) {
+  # Check arguments
+  check_character("pattern", pattern, nullok = TRUE)
+  check_character("repo", repo)
+  check_logical("quiet", quiet)
+
+  # Get decks
   if (repo == "JeffreyRStevens/flashr_decks") {
     decks_repo <- "https://raw.githubusercontent.com/JeffreyRStevens/flashr_decks/main/decks/00_all_decks.csv"
     fail_gracefully(decks_repo)
@@ -113,6 +119,10 @@ list_decks <- function(pattern = NULL,
 #' the user can choose one of the decks to generate flashcards.
 #' @export
 #'
+#' @note
+#' This function **requires internet connectivity** as it checks GitHub repos
+#' for decks.
+#'
 #' @family functions for finding decks
 #'
 #' @examplesIf interactive()
@@ -129,6 +139,10 @@ list_decks <- function(pattern = NULL,
 choose_deck <- function(pattern = NULL,
                         choice = NULL,
                         repo = "JeffreyRStevens/flashr_decks") {
+  # Check arguments
+  check_character("pattern", pattern, nullok = TRUE)
+  check_character("repo", repo)
+
   # If no choice is passed to function
   if (is.null(choice)) {
     # List decks
@@ -178,7 +192,7 @@ get_title_mem <- memoise::memoise(get_title)
 
 # Get file names in repository
 get_repo <- function(repo_text) {
-  gh::gh(repo_text) |>
-    vapply("[[", "", "name")
+  x <- gh::gh(repo_text)
+  vapply(x, "[[", "", "name")
 }
 get_repo_mem <- memoise::memoise(get_repo)
